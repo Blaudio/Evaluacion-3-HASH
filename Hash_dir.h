@@ -7,34 +7,46 @@ typedef struct _clave{
 }Clave;
 
 typedef struct Registro{
-	Clave clave;
+	Clave *dato;
 	int archivo;
 }Registro;
 
 Registro *tabla[TAMANO];
 
-Clave *inicializa_clave(){
+Clave *inicializa_clave(int k){
 	Clave *tmp;
 	tmp=malloc(sizeof(Clave));
-	tmp->identificador=0;
+	tmp->identificador=k;
 	return(tmp);
 }
 
 Registro *inicializa_tabla(){
 	Registro *tmp[TAMANO];
-	tmp[TAMANO]=malloc(sizeof(Registro));
-	tmp[TAMANO]->archivo=0;
-//	tmp[TAMANO]->clave=NULL;
+	int i;
+	for(i=0;i<=TAMANO; i+1){
+		tmp[i]=malloc(sizeof(Registro));
+		tmp[i]->archivo=0;
+		tmp[i]->dato=NULL;
+	}
 	return(tmp[TAMANO]);
 }
 
-int hash(Registro *tabla[TAMANO], Clave *tmp, int i){
+//Registro hash(Registro *tabla[TAMANO], Clave *tmp, int i){
+//	int k;
+//	k=hash2(tmp)+i;
+//	  if(tabla[k]->archivo == 0){
+//		return(tabla[k]->clave=tmp);
+//	}
+//	return(hash(tabla[TAMANO],tmp,i+1));
+//}
+
+int hash(Registro *aux[TAMANO], Clave *tmp, int i){
 	int k;
-	//k=clave->identificador;
-	if(tabla[hash2(tmp)]->archivo == 0){
-		return(hash2(tmp));
+	k=hash2(tmp)+i;
+	  if(aux[k]->dato!=NULL){
+		return(k);
 	}
-	return(hash(tabla[TAMANO],tmp,i+1));
+	return(hash(aux, tmp, i++));
 }
 
 int hash2(Clave *tmp){
@@ -42,3 +54,4 @@ int hash2(Clave *tmp){
 	k=tmp->identificador;
 	return(k%TAMANO);
 }
+
