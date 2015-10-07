@@ -7,11 +7,11 @@ typedef struct _clave{
 }Clave;
 
 typedef struct _registro{
-	Clave clave;
+	Clave *clave;
 }Registro;
 
 typedef struct _nodo{
-	Registro datos;
+	Registro *dato;
 	struct Nodo *sgt_dato;
 }Nodo;
 
@@ -27,7 +27,7 @@ Clave *inicializa_clave(){
 Nodo *inicializa_tabla(){
 	Nodo *tmp[TAMANO];
 	tmp[TAMANO]=malloc(sizeof(Nodo));
-	//tmp[TAMANO]->datos=NULL;
+	tmp[TAMANO]->dato=NULL;
 	tmp[TAMANO]->sgt_dato=NULL;
 	return(tmp[TAMANO]);
 }
