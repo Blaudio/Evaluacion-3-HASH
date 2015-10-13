@@ -36,7 +36,7 @@ int main(){
 	char aux_region[3], aux_month[2], basura;
 	char fila[80];
 	FILE* fichero;
-	fichero = fopen ("C:\\conexiones2.txt", "r");
+	fichero = fopen ("C:\\conexiones.txt", "r");
 	while (feof(fichero)==0){
 		fgets(fila, 80, (fichero));
 		fscanf(fichero,"%i	%s %s %d %c %d",&aux_year,&aux_region,&aux_month,&aux_conexiones,&basura,&aux_conexiones2);
